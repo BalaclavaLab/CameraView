@@ -588,7 +588,11 @@ public class Camera1Engine extends CameraBaseEngine implements
             // parameters, not sure why. Since we never lock it, this should be
             // harmless for the rest of the engine.
             params.setWhiteBalance(mMapper.mapWhiteBalance(mWhiteBalance));
-            params.remove("auto-whitebalance-lock");
+
+            //The following line causes camera crash on Samsung Galaxy S4
+            if(!android.os.Build.MODEL.equals("GT-I9515"))
+                params.remove("auto-whitebalance-lock");
+
             return true;
         }
         mWhiteBalance = oldWhiteBalance;
